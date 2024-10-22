@@ -1,0 +1,11 @@
+Django==5.1.2
+dj_database_url==2.2.0  #connect to different dbs
+redis==5.1.1 # for storing key-value pairs [ for caching ]
+whitenoise==6.7.0 # serve static files
+celery==5.4.0 # for async tasks
+django-environ==0.11.2 # work with environment variables
+gunicorn==23.0.0 # to host on a server
+psycopg2==2.9.10 # postgresql adapter
+djangorestframework==3.15.2 # for the api requests
+django-admin-interface==0.29.0 # get that fine admin dashboard UI
+django-admin-autocomplete-filter==0.7.1 # render list filters in django admin using an autocomplete widget
