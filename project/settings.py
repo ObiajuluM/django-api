@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "admin_auto_filters",  # render list filters in django admin using an autocomplete widget
     "admin_interface",  # get that fine admin dashboard UI
     "colorfield",  # required by admin_interface
+    "rest_framework",  # add rest framwork
     #
     "django.contrib.admin",
     "django.contrib.auth",
@@ -54,6 +55,8 @@ INSTALLED_APPS = [
     # best practice to add the app - instead of "just name"; so it can load data from apps.py
     "common.apps.CommonConfig",
     "access.apps.AccessConfig",
+    "content.apps.ContentConfig",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -147,3 +150,9 @@ REDIS_URL = ENV.str("REDIS_URL")
 
 # what user model we are using
 AUTH_USER_MODEL = "access.User"
+
+
+# set a default rendering class - remove to load rest ui
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+}
