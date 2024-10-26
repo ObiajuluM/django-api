@@ -1,15 +1,16 @@
 from django.http import HttpRequest
 from rest_framework.generics import GenericAPIView
-from rest_framework.response import Response
 from rest_framework.mixins import (
-    # help us write less code in our api
+    # help us write less code for our api
     DestroyModelMixin,
     ListModelMixin,
     CreateModelMixin,
     RetrieveModelMixin,
     UpdateModelMixin,
 )
-from .querysets import PUBLIC_POSTS_QUERYSET
+
+from api.permissions import AllowAny, IsAuthenticated
+from .querysets import ALL_POSTS_QUERYSET, PUBLIC_POSTS_QUERYSET
 from .serializers import PostSerializer
 from .filters import PostFilter
 
@@ -22,6 +23,8 @@ class PostApiView(GenericAPIView):
     serializer_class = PostSerializer
     # set the filter
     filterset_class = PostFilter
+    # set default permission class
+    permission_classes = [AllowAny]
 
     # make API searchable
     search_fields = [
@@ -70,5 +73,16 @@ class PostRetrieveUpdateDestroyView(
     # get request a single item in the db
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
-    
-    
+
+
+class PostMeListView(ListModelMixin, PostApiView):
+
+    # set permission class
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # return all posts the used created that isnt marked as deleted
+        return ALL_POSTS_QUERYSET.filter(owner=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

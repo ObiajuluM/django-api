@@ -155,4 +155,8 @@ AUTH_USER_MODEL = "access.User"
 # set a default rendering class - remove to load rest ui
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+    # setup default authentication on rest framework
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
+    ],
 }

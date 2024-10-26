@@ -1,9 +1,10 @@
 from cgitb import lookup
 from django.urls import include, path
-from .views import PostListCreateView, PostRetrieveUpdateDestroyView
+from .views import PostListCreateView, PostMeListView, PostRetrieveUpdateDestroyView
 
 urlpatterns = [
     path("", PostListCreateView.as_view()),
+    path("me/", PostMeListView.as_view()),
     path(
         "<uuid:uuid>/",  # first one is type of field : second one is field name
         PostRetrieveUpdateDestroyView.as_view(

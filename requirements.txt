@@ -10,3 +10,4 @@ djangorestframework==3.15.2 # for the api requests
 django-admin-interface==0.29.0 # get that fine admin dashboard UI
 django-admin-autocomplete-filter==0.7.1 # render list filters in django admin using an autocomplete widget
 django-filter==24.3 # ability to filter 
+djangorestframework-simplejwt==5.3.1 # use for authentication
