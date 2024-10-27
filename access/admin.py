@@ -2,11 +2,16 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 from access.models import User
+from django.contrib.auth.models import Group
 
 # Register your models here.
 #  register the user model to show up on the admin panel
 
 # admin.site.register(User) # this should have been normal
+
+
+#  to remove things that are registered by default
+admin.site.unregister(Group)
 
 
 #  register user model

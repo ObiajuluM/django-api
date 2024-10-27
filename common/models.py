@@ -13,7 +13,7 @@ class AbstractModel(models.Model):
     # generate a unique identifier everytime the model is made
     uuid = models.UUIDField(
         _("UUID"),  # name of the field with transaltion support
-        default=uuid.uuid4(),  # default field for the uuid
+        default=uuid.uuid4,  # default field for the uuid
         unique=True,  # make unique
         editable=False,  #  make not editable
         db_index=True,  # set to be used as db index - query by uuid

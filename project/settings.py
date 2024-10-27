@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from .environment import ENV
 from pathlib import Path
+from datetime import timedelta
 import dj_database_url
 
 
@@ -159,4 +160,34 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication"
     ],
+    # for pagination 1
+    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    # "PAGE_SIZE": ENV.int("API_DEFAULT_PAGE_SIZE", default=10),  # page size
+    # ---------- #
+    # for pagination 2
+    "DEFAULT_PAGINATION_CLASS": "api.pagination.PageNumberPagination",
 }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        seconds=ENV.int("AUTH_JWT_ACCESS_TOKEN_TIMEOUT", default=86400)
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        seconds=ENV.int("AUTH_JWT_REFRESH_TOKEN_TIMEOUT", default=604800)
+    ),
+    "ROTATE_REFRESH_TOKENS": True,
+    "SIGNING_KEY": ENV.str(
+        "AUTH_JWT_SIGNING_KEY"  # changing this makes all the existing jwt tokens invalid
+    ),
+    "USER_ID_FIELD": "uuid",
+}
+
+#  to increase the auth token time
+AUTH_TOKEN_TIMEOUT = ENV.int("AUTH_TOKEN_TIMEOUT", default=259200)
+AUTH_TOKEN_SECRET = ENV.str("AUTH_TOKEN_SECRET")
+
+
+#
+API_DEFAULT_PAGE_SIZE = ENV.int("API_DEFAULT_PAGE_SIZE", default=10)
+# user can reequest a page size - this is to set the maximum
+API_MAX_PAGE_SIZE = ENV.int("API_MAX_PAGE_SIZE", default=100)
