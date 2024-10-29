@@ -65,6 +65,7 @@ class Comment(AbstractModel):
         verbose_name=_("Post"),  # presentation name
         related_name="comments",  # for django relations and you can call `Post.comments`
         on_delete=models.CASCADE,
+        
     )
 
     # body of the comment

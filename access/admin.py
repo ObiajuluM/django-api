@@ -57,11 +57,11 @@ class UserAdmin(BaseUserAdmin):  #  create class [modelname]+admin
     ordering = ["-created_at"]
 
     #  field sets are literally arranging attributes of your models into different fields
-    # optional: used to create a new one from scratch
+    # optional: used to create a new admin model from scratch
     add_fieldsets = (
         (
             _("Details"),
-            {"fields": ["name", "email"]},
+            {"fields": ["name", "bio", "email"]},
         ),
         (
             _("Access"),
@@ -77,7 +77,7 @@ class UserAdmin(BaseUserAdmin):  #  create class [modelname]+admin
     fieldsets = (
         (
             _("Details"),
-            {"fields": ["id", "uuid", "name", "email"]},
+            {"fields": ["id", "uuid", "name", "bio", "email"]},
         ),
         (
             _("Access"),

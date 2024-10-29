@@ -75,6 +75,10 @@ class User(AbstractModel, AbstractBaseUser):
     def __str__(self) -> str:
         return self.name + self.email
 
+    bio = models.TextField(
+        blank=True,
+    )
+
     """ Django required  beacuse we inherited from the AbstractBaseUser ⬇️"""
     # tell django to use email as the user name field - beacuse we inherited from the AbstractBaseUser
     USERNAME_FIELD = "email"

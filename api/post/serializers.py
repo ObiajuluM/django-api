@@ -1,9 +1,13 @@
 from rest_framework import serializers
 from content.models import Post
+from api.user.serializers import UserPublicSerializer
 
 
 #  serialize the post object to json
 class PostSerializer(serializers.ModelSerializer):
+
+    # define the owner of the post
+    owner = UserPublicSerializer(read_only=True)
 
     class Meta:
         model = Post  # the model we are serializing
@@ -13,6 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
             "id",
             "uuid",
             "title",
+            "owner",
             "body",
             "status",
             "created_at",
@@ -24,5 +29,6 @@ class PostSerializer(serializers.ModelSerializer):
             "id",
             "uuid",
             "owner",
+            # "owner",
             "created_at",
         ]
