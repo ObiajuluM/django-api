@@ -1,5 +1,4 @@
 import uuid
-from click import edit
 from django.db import models
 
 # translation support in different languages
